@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        .pointer {
+            cursor: pointer;
+        }
+        
+        .container {
+            background-color: #1CDEA6;
+            border-radius: 10px;
+            border: solid #000000;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Admin Dashboard</h1>
+    <i>Submitting data will automatically cause this page to refresh. Manually refresh the page if no valid changes appear. Note that some changes you attempt to create will not produce results if you format data incorrectly.</i><br>
+    <i>Required fields are indicated with an *.</i>
+    <hr> Page contents
+    <ul>
+        <li class="pointer">Add parking area</li>
+        <li class="pointer">Delete parking area</li>
+        <li class="pointer">Manage reviews for a parking area</li>
+        <li class="pointer">Add parking spots for a parking area</li>
+        <li class="pointer">Monitor the stats for a parking area</li>
+        <li class="pointer">Delete a parking spot for a parking area</li>
+        <li class="pointer">Modify a parking spot for a parking area</li>
+        <li class="pointer">Ban and delete a user</li>
+        <li class="pointer">Data schema</li>
+    </ul>
+    <hr>
+
+    <!--Code to submit a new parking area-->
+    <div class="container">
+        <h3 id="addParkingAreaSection"><u>Add parking area</u></h3>
+        <p>To add a new parking area, fill in the details below:</p>
+
+        <!--Field for name of new parking area-->
+        <label for="name">*Unique name of new parking area:</label><br>
+        <input type="text" id="name" name="name" placeholder="Earlham Car Park"><br>
+        <!--Field for latitude of new parking area-->
+        <label for="lat">*Latitude:</label><br>
+        <input type="text" id="lat" name="lat" placeholder="52.626284"><br>
+        <!--Field for longitude of new parking area-->
+        <label for="long">*Longitude:</label><br>
+        <input type="text" id="long" name="long" placeholder="1.239590"><br>
+
+        <!--Checkboxes for open days of new parking area-->
+        <p>*Open on these days:</p>
+        <input type="checkbox" id="sundayCheckBox" value="Sunday">
+        <label for="Sunday">Sunday</label><br>
+        <input type="checkbox" id="mondayCheckBox" value="Monday">
+        <label for="Monday">Monday</label><br>
+        <input type="checkbox" id="tuesdayCheckBox" value="Tuesday">
+        <label for="Tuesday">Tuesday</label><br>
+        <input type="checkbox" id="wednesdayCheckBox" value="Wednesday">
+        <label for="Wednesday">Wednesday</label><br>
+        <input type="checkbox" id="thursdayCheckBox" value="Thursday">
+        <label for="Thursday">Thursday</label><br>
+        <input type="checkbox" id="fridayCheckBox" value="Friday">
+        <label for="Friday">Friday</label><br>
+        <input type="checkbox" id="saturdayCheckBox" value="Saturday">
+        <label for="Saturday">Saturday</label><br>
+
+        <!--Dropdown for opening time of new parking area-->
+        <br>
+        <label for="openingTime">*Opening Time:</label>
+        <br>
+        <select id="openingTime">
+                <option selected>Select time..</option>
+                <option value="00:00">00:00</option>
+                <option value="01:00">01:00</option>
+                <option value="02:00">02:00</option>
+                <option value="03:00">03:00</option>
+                <option value="04:00">04:00</option>
+                <option value="05:00">05:00</option>
+                <option value="06:00">06:00</option>
+                <option value="07:00">07:00</option>
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
+            </select> <br>
+
+        <br>
+        <!--Dropdown for closing time of new parking area-->
+        <label for="closingTime">*Closing Time:</label>
+        <br>
+        <select id="closingTime">
+                <option selected>Select time..</option>
+                <option value="00:00">00:00</option>
+                <option value="01:00">01:00</option>
+                <option value="02:00">02:00</option>
+                <option value="03:00">03:00</option>
+                <option value="04:00">04:00</option>
+                <option value="05:00">05:00</option>
+                <option value="06:00">06:00</option>
+                <option value="07:00">07:00</option>
+                <option value="08:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
+                </select> <br>
+
+        <!--Checkboxes for accessibility of new parking area-->
+        <p>Accessibility options:</p>
+        <input type="checkbox" id="dpCheckBox" value="disabledParking">
+        <label for="dpCheckBox">Provides disabled parking spots</label><br>
+        <input type="checkbox" id="evCheckBox" value="evCharging">
+        <label for="evCheckBox">Provides electric charging spots</label><br>
+
+        <br>
+        <i>Note: Adding a new parking area will automatically generate and assign fifthteen default parking spots to the parking area upon successful creation.</i>
+        <br> <br>
+        <!--Submission button for new parking area-->
+        <button id="submitArea">Submit</button>
+    </div>
+
+    <hr>
+
+    <!--Code to delete a parking area-->
+    <div class="container">
+        <h3><u>Delete parking area</u></h3>
+        <p>To delete an existing parking area, fill in the box below:</p>
+
+        <!--Div to hold the names and index IDs of the existing parking areas-->
+        <h4>Current parking areas:</h4>
+        <div id="parkingAreaList">
+        </div>
+        <br>
+        <!--Field for index ID of parking area to delete-->
+        <label for="parkingAreaNameDelete">*Enter existing ID of parking area to delete:</label><br>
+        <input type="text" id="parkingAreaNameDelete" name="parkingAreaNameDelete" placeholder="0"><br>
+        <br>
+        <!--Button to submit parking area index ID to delete-->
+        <button id="submitDeleteArea">Delete</button>
+    </div>
+    <hr>
+
+    <div class="container">
+        <h3><u>Manage reviews for a parking area</u></h3>
+
+        <h4>Current parking areas:</h4>
+        <div id="parkingAreaListForReview">
+        </div>
+
+        <br>
+
+        <label for="parkingAreaNameReviewID">*Enter existing ID of parking area to display corresponding reviews:</label><br>
+        <input type="text" id="parkingAreaNameReviewID" name="parkingAreaNameReviewID" placeholder="0">
+        <br>
+        <br>
+        <button id="displayParkingAreaReviewsBtn">Display</button>
+        <br>
+        <br>
+        <div id="parkingAreaReviews">
+
+        </div>
+
+        <label for="reviewIDToDelete">*Enter existing ID of review to delete:</label><br>
+        <input type="text" id="reviewIDToDelete" name="reviewIDToDelete" placeholder="0">
+        <br>
+        <br>
+        <button id="deleteReviewBtn">Delete</button>
+    </div>
+
+
+    <hr>
+    <!--Code to add parking spot for a parking area-->
+    <div class="container">
+        <h3><u>Add parking spots for a parking area</u></h3>
+        <p>To add a parking spot, please enter existing parking area name and fill the following details:</p>
+
+        <h4>Current parking areas:</h4>
+        <div id="parkingAreaListForSlots">
+        </div>
+        <br>
+        <label for="parkingAreaNameSlot">*Enter existing ID of parking area to add spots for:</label><br>
+        <input type="text" id="parkingAreaNameAddSlot" name="parkingAreaNameSlot" placeholder="0"><br>
+        <p>Accessibility options parking spot:</p>
+        <input type="checkbox" id="disabledSpotCheckBox" value="disabledParkingSpot">
+        <label for="dpCheckBox">Is it a disabled parking spot?</label><br>
+        <input type="checkbox" id="evSpotCheckBox" value="evChargingSpot">
+        <label for="evCheckBox">Is it an electric charging spot?</label><br>
+        <br>
+        <button id="submitAddSpot">Add parking spot</button>
+    </div>
+    <hr>
+
+    <!--Code to show stats for a parking area-->
+    <div class="container">
+        <h3><u>Monitor the stats for a parking area</u></h3>
+        <p>To display stats for a parking area, enter the existing ID of a parking area you want to monitor the stats for.:</p>
+
+        <h4>Current parking areas:</h4>
+        <div id="parkingAreaListForStats">
+        </div>
+        <br>
+        <label for="parkingAreaNameStats">*Enter existing ID of parking area display data for:</label><br>
+        <input type="text" id="parkingAreaNameStats" name="parkingAreaNameStats" placeholder="0"><br><br>
+        <button id="submitshowStats">Display stats for this area</button><br>
+        <div id="parkignAreaStats"></div>
+        <p>Parking area data:</p>
+        <p>Selected Area:</p>
+        <p id="selectedStatAreaName"></p>
+        <div id="donutGraph">
+        </div><br>
+
+        <p>Total parking spaces:</p>
+        <p id="totalSpaces"></p>
+        <p>Total available parking spaces:</p>
+        <p id="availableSpaces"></p>
+        <p>Total occupied parking spaces:</p>
+        <p id="occupiedSpaces"></p>
+        <p>Total reserved parking spaces:</p>
+        <p id="reservedSpaces"></p>
+        <p>Total disabled parking spaces:</p>
+        <p id="disabledSpaces"></p>
+        <p>Total EV parking spaces:</p>
+        <p id="electricSpaces"></p>
+    </div>
+
+    <br>
+    </div>
+    <hr>
+
+    <!--Code to delete parking spot for a parking area-->
+    <div class="container">
+        <h3><u>Delete a parking spot for a parking area</u></h3>
+        <p>To delete a parking spot, enter the existing parking area ID to choose the parking area to edit and choose a spot to delete:</p>
+
+        <h4>Current parking areas:</h4>
+        <div id="parkingAreaListForSlotDelete">
+        </div>
+        <br>
+        <label for="parkingAreaNameSlotDelete">*Enter existing ID of parking area to delete parking spots for:</label><br>
+        <input type="text" id="parkingAreaNameDeleteSlot" name="parkingAreaNameSlotDelete" placeholder="0">
+        <br> <br>
+        <button id="submitshowDeleteSpots">Display parking spots for this area</button><br>
+        <p>All Parking Spots for this area</p>
+        <div id="parking spots delete">
+
+        </div>
+
+        Selected Parking Spot current data:
+        <div id="selectedParkingDeleteSpotName">-</div>
+
+        Spot occupation status:
+        <div id="DeleteSpotOccupied">-</div>
+
+        Spot reservation status:
+        <div id="DeleteSpotReserved">-</div>
+
+        Is it an electric charging spot?:
+        <div id="DeleteSpotEV">-</div>
+        Is it a disabled spot?:
+        <div id="DeleteSpotDisabled">-</div>
+
+        <br>
+        <button id="submitDeleteSpot">Delete Parking Spot</button>
+    </div>
+
+    <hr>
+    <!--Code to edit parking spot for a parking area-->
+    <div class="container">
+        <h3><u>Modify a parking spot for a parking area</u></h3>
+        <p>To modify a parking spot, enter an existing parking area ID to choose the parking area to edit and choose a spot to modify:</p>
+
+        <h4>Current parking areas:</h4>
+        <div id="parkingAreaListForSlotChange">
+        </div>
+        <br>
+        <label for="parkingAreaNameSlotModify">*Enter ID of parking area to edit parking spots for:</label><br>
+        <input type="text" id="parkingAreaNameEditSlot" name="parkingAreaNameSlotModify" placeholder="0">
+        <br> <br>
+        <button id="submitshowSpots">Display parking spots for this area</button><br>
+        <p>All Parking Spots for this area</p>
+        <div id="parking spots">
+
+        </div>
+
+        Selected Parking Spot current data:
+        <div id="selectedParkingSpotName">-</div>
+
+        Spot occupation status:
+        <div id="SpotOccupied">-</div>
+
+        Spot reservation status:
+        <div id="SpotReserved">-</div>
+
+        Is it an electric charging spot?:
+        <div id="SpotEV">-</div>
+        Is it a disabled spot?:
+        <div id="SpotDisabled">-</div>
+        <p>Accessibility options for this parking spot:</p>
+        <input type="checkbox" id="occupiedEditSpotCheckBox" value="disabledParkingSpot">
+        <label for="dpCheckBox">Is it now occupied?</label><br>
+        <input type="checkbox" id="reservedEditSpotCheckBox" value="disabledParkingSpot">
+        <label for="dpCheckBox">Is it now reserved?</label><br>
+        <input type="checkbox" id="disabledEditSpotCheckBox" value="disabledParkingSpot">
+        <label for="dpCheckBox">Is it now a disabled parking spot?</label><br>
+        <input type="checkbox" id="evEditSpotCheckBox" value="evChargingSpot">
+        <label for="evCheckBox">Is it now an electric charging spot?</label><br>
+        <br>
+        <button id="submitEditSpot">Modify Parking Spot</button>
+    </div>
+
+    <hr>
+
+    <!--Code to ban and delete users-->
+
+    <div class="container">
+        <h3><u>Ban and delete a user</u></h3>
+
+        <div class="column"></div>
+
+        <label> Enter the username of the existing user you wish to ban or delete: <br>
+                <label for="deleteUser">Username:</label>
+        <input type="text" id="deleteUser" name="deleteUser" placeholder="johndoe"><br><br>
+
+
+
+        <div style="display: inline-block">
+
+            <label id="submitDELETELabel" for="submitDELETE"></label>
+            <button class="medium-btn" type="button" name="submitDELETE" id="submitDELETE">Delete</button>
+
+            <label id="submitBANLabel" for="submitBAN"></label>
+            <button class="medium-btn" type="button" name="submitBAN" id="submitBAN">Ban</button>
+
+            <label id="submitUNBANLabel" for="submitUNBAN"></label>
+            <button class="medium-btn" type="button" name="submitUNBAN" id="submitUNBAN">Unban</button>
+
+        </div>
+    </div>
+
+
+    <hr>
+
+    <!--Code for emailing users from Admins-->
+    <div class="container">
+        <h3><u>Send an email to an existing user here. They will recieve your message below in the form of an email to their registered email address:  <br></u></h3>
+
+        <label for="usernameSelect">Select username: </label>
+        <select name="usernameSelect" id="usernameSelect"></select><br><br>
+
+        <textarea id="adminMessageTextArea" name="adminMessageTextArea" rows="10" cols="50" style="resize: none;"></textarea>
+
+        <br>
+
+        <label id="submitADMINmessageLabel" for="submitADMINmessage"></label>
+        <button class="medium-btn" type="button" name="submitADMINmessage" id="submitADMINmessage">Submit email</button>
+
+    </div>
+    <hr>
+
+    <!--code for setting requests to deny or accept-->
+    <div class="container">
+        <h3><u> Here you can set requests to be denied or accepted</u></h3>
+
+        <label> For example if you have a request sent through you can deny or accept the request. Denying the request sets the 
+                spot back to not reserved, accepting the request sets this to reserved.
+        </label>
+        <br/>
+
+        <h4>Current parking requests:</h4>
+        <div id="viewareas">
+        </div>
+        <br>
+
+        <label for="parkingAreaName">*Enter ID of booking to approve or deny:</label><br>
+        <input type="text" id="parkingAreaNameid" name="parkingAreaNameid" placeholder="0"><br>
+        <br>
+
+        <button id="selectareabutton">Select Area</button>
+        <div id="bookinglists"></div>
+        <button id="approvebutton">Approve</button>
+        <button id="denybutton">Deny</button>
+    </div>
+    <hr>
+
+    <div class="container">
+        <h3><u> Here you can change the assigned spot of a booking</u></h3>
+
+        <label> For example if the driver has contacted saying they would like to change their spot or area</label>
+
+        <div id="allbookings"></div>
+
+        <br/>
+
+        <label for="">*Enter ID of booking to change area or spot:</label>
+        <input type="text" id="bookingsid" name="bookingsid" placeholder="0"><br>
+        <br>
+        <button id="selectbooking">Select Booking</button>
+        <br/>
+        <br/>
+        <div id="displayparkingareas"></div>
+        <div id="bookingareas"></div>
+        <div id="bookingspots"></div>
+    </div>
+    <hr>
+
+    <!--Code for accessing and editing user Schema-->
+    <div class="container">
+        <h3><u>User Data Schema<br></u></h3>
+
+        <p>Here you can control the data the system holds about the users registered to the website. You can add and remove new fields
+            in the format {"[DATA_FIELD_NAME]:[TYPE]"}.</p>
+
+        <h4>Examples:</h4>
+        
+        <p><i>"middleName":""</i> to add a word (string) value called middleName with the default value of nothing.</p>
+        <p><i>"isStudent":false</i> to add a true/false state called isStudent with the default value of false.</p>
+        <p><i>"discountPercentage":15</i> to add a numerical value called discountPercentage with the default value of 15.</p>
+
+        <p><u>Please ensure to separate each data field with a comma.</u></p>
+
+        <textarea id="userSchemaTextArea" placeholder='{"first_name":"","last_name":"","email_address":"","phone":"","house_number":"","postcode":"","username":"","password":"","age":"","gender":"","comments":"","banned":false}' name="userSchemaTextArea" rows="20"
+            cols="90" style="resize: none;"></textarea>
+
+        <br>
+
+        <label id="submitSCHEMALabel" for="submitSCHEMA"></label>
+        <button class="medium-btn" type="button" name="submitSCHEMA" id="submitSCHEMA">Submit Schema</button>
+    </div>
+
+    <hr>
+
+    <!--Code for logout-->
+
+    <label id="logoutLabel" for="logout"></label>
+    <button class="medium-btn" type="button" name="logout" id="logout">Logout</button>
+
+    <hr>
+
+</body>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-pie.min.js"></script>
+<script src="dashboard.js"></script>
+
+</html>

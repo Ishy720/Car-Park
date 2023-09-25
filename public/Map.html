@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+		<meta http-equiv = "X-UA-Compatible" content = "ie=edge">
+		<title>Map</title>
+
+		<!--Bing Maps SDK -->
+		<script type='text/javascript'
+				src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AivMeRll60yDhOM4ExLXWwgD5889O8UluGTFkPUjcjrCkUH9LNAxG4dtcVGYLZwz' 
+				async defer></script>
+		
+		<script type='text/javascript'>
+
+			class parkingAreaObject {
+			
+				constructor(latitude, longitude, title) {
+					this.latitude = latitude;
+					this.longitude = longitude;
+					this.title = title;
+				}
+				
+				getLat() {
+					return this.latitude;
+				}
+				
+				getLong() {
+					return this.longitude;
+				}
+				
+				getTitle() {
+					return this.title;
+				}
+			};
+			
+			
+			function GetMap()
+			{
+				//map camera bounds
+				var bounds = Microsoft.Maps.LocationRect.fromLocations(new Microsoft.Maps.Location(52.620435402508356, 1.221517109457411), new Microsoft.Maps.Location(52.62747041534185, 1.2476830255518254));
+				
+				//fixed locations (currently existing car parks on UEA campus)
+				let pin1Location = new Microsoft.Maps.Location(52.622350745971, 1.236106751549445); //UEA WEST CAR PARK
+				let pin2Location = new Microsoft.Maps.Location(52.62356344382005, 1.243223435694561); //UEA BIG CAR PARK
+				let pin3Location = new Microsoft.Maps.Location(52.62548853264027, 1.2248449114835889); //UEA TRIANGLE CAR PARK
+				
+				//map configuration
+				var map = new Microsoft.Maps.Map('#myMap', {
+					maxBounds: bounds,
+					showLocateMeButton: false,
+					showMapTypeSelector: false,
+					enableClickableLogo: false,
+					disableKeyboardInput: false,
+				});
+				map.setOptions({
+					minZoom: 15,
+					maxZoom: 17
+				});
+				map.setView({
+					mapTypeId: Microsoft.Maps.MapTypeId.road,
+					center: new Microsoft.Maps.Location(52.62201955831304, 1.2392874601292663),
+					zoom: 15
+				});
+				
+				var pin1 = new Microsoft.Maps.Pushpin(pin1Location, {
+					title: 'UEA West Car Park'
+				});
+
+				var pin2 = new Microsoft.Maps.Pushpin(pin2Location, {
+					title: 'UEA Big Car Park'
+				});
+
+				var pin3 = new Microsoft.Maps.Pushpin(pin3Location, {
+					title: 'UEA Triangle Car Park'
+				});
+
+				Microsoft.Maps.Events.addHandler(pin1, 'click', function() {
+					document.getElementById('selectedParkingAreaText').innerHTML = 'UEA West Car Park';
+				});
+
+				Microsoft.Maps.Events.addHandler(pin2, 'click', function() {
+					document.getElementById('selectedParkingAreaText').innerHTML = 'UEA Big Car Park';
+				});
+
+				Microsoft.Maps.Events.addHandler(pin3, 'click', function() {
+					document.getElementById('selectedParkingAreaText').innerHTML = 'UEA Triangle Car Park';
+				});
+
+				//push the pushpins on the map representing the 3 existing car parks
+				var pinList = [pin1, pin2, pin3];
+				for(i = 0; i < pinList.length; i++) {
+					map.entities.push(pinList[i]);
+				}
+
+				//use fetch api to retrieve database content
+				fetch('/ParkingAreaDB.json').then((response) => {
+					return response.json();
+				}).then(data => {
+					for(var i in data) {
+						try {
+							let currentParkingAreaName = data[i].parkingAreaName;
+							var customPin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].lat, data[i].long), {
+								title: currentParkingAreaName
+							})
+							Microsoft.Maps.Events.addHandler(customPin, 'click', function() {
+								document.getElementById('selectedParkingAreaText').innerHTML = currentParkingAreaName;
+							})
+							map.entities.push(customPin);
+						}
+						catch(ex) {
+							console.log(ex);
+						}
+					}
+
+				}).catch((err) => {
+					console.log(err);
+				});
+			}
+		</script>
+	</head>
+	
+	<header>
+		<nav>
+			<ul>
+				<!--Navigation-->
+				<li><a href="bookings.html">My Bookings</a></li>
+			</ul>
+	</nav>
+	</header>
+
+	<body>
+	    <h1><strong>Testing Bing Map API</strong></h1>
+		
+		<div id="myMap" style="position:relative;width:600px;height:400px;">
+		</div>
+		
+		<br>
+		<div>Click a parking area to select it.
+		</div>
+		<div id = "selectedParkingAreaText">-</div>
+
+	</body>
+	
+    <footer>
+        <div>
+            <small><i>THIS DOES NOT REPRESENT FINAL PRODUCT | PAGE IS LIABLE TO CHANGE </i></small><br>
+        </div>
+    </footer>
+	
+</html>

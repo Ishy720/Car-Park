@@ -1,0 +1,188 @@
+<!-- ---------------------------------------------------------------->
+<!-- ---------------------------------------------------------------->
+<!-- ---------------------------------------------------------------->
+<!-- ---------------------------------------------------------------->
+<!-- ---------------------------------------------------------------->
+<!-- ---------------------------------------------------------------->
+
+
+<!-- Harry's code for both login and sign up page, INFORM me before making any changes -->
+
+<!-- ---------------------------------------------------------------->
+<!-- ---------------------------------------------------------------->
+<!-- ---------------------------------------------------------------->
+<!-- ---------------------------------------------------------------->
+<!-- ---------------------------------------------------------------->
+<!-- ---------------------------------------------------------------->
+
+
+
+<!DOCTYPE html> <!--declares document type-->
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login/Signup</title>
+
+	<link rel="stylesheet" href="harryLoginSignupPage.css">
+	<script defer src="loginSignUp.js"></script>
+</head>
+
+<body>
+<div class="container">
+<main>
+	<!--Navigation Bar Links-->
+	<nav class="navbar"> <ul>
+		<img src="img/logotemp3.png" class="logo">
+		<li><a href="#homePage">Login</a></li>
+		<li><a href="#signup">Sign Up</a></li>
+	</ul> </nav>
+	
+	<!--Side Menu For Smaller Screens-->
+	<div id="sideNav" class="sideOverlay">
+		<a href="javascript:void(0)" class="closeNav" onclick="closeNav()">&times;</a>
+	<div class="sideOverlay-content">
+		<a href="#homePage">Login</a>
+		<a href="#signup">Sign Up</a>
+	</div></div>
+	<span class="sideMenu" onclick="openNav()">&#9776; Menu</span>
+	
+	<!--Page Border-->
+	<div id="left"></div><div id="right"></div>
+	<div id="top"></div><div id="bottom"></div>
+
+
+	<!--Pop Up Feedback Button-->
+	<button onclick="togglePopup()">
+		<div id="feedback"> <a>Contact Information</a> </div>
+	</button>
+
+	<!--Pop Up Feedback Text Area-->
+	<div class="popup" id="popup-1"> <div class="overlay"></div>
+	<div class="content">
+		<div class="closePopUp" onclick="togglePopup()">&times;</div>
+		<p>Ish: jem20gcu@uea.ac.uk</p> &nbsp; <p>Harry: wky19kza@uea.ac.uk</p> &nbsp; <p>Tolga: cbc20nhu@uea.ac.uk</p> &nbsp; <p>Jordan: xun20mhu@uea.ac.uk</p> &nbsp; <p>Joey: zkb20vhu@uea.ac.uk</p>
+	</div> </div>
+
+	<!--Pop Up Privacy Policy Button-->
+	<button onclick="togglePopup1()">
+		<div id="feedback1"> <a>Privacy Policy</a> </div>
+	</button>
+
+	<!--Pop Up Privacy Policy Text Area-->
+	<div class="popup2" id="popup-2"> <div class="overlay"></div>
+	<div class="content">
+		<div class="closePopUp" onclick="togglePopup1()">&times;</div>
+		<h3><u>SE PMS Privacy Policy</u></h3><br>
+		<h4>About us</h4>
+		<br>
+		<p>We value your privacy. This website is operated by the University of East Anglia School of Computing Sciences.
+			By signing up and using our service, you are agreeing and consenting to distributing your data with us. We confirm to keep your
+			data secure and our services comply with all applicable United Kingdom Data Protection data regulations and legislation.
+		</p>
+		<br>
+		<h4>The data we collect from you</h4>
+		<br>
+		<p>We may collect, use and store data about the individuals who use our website. You may supply us information when you
+			fill forms on the website. This includes your name, date of birth, email, age, gender and payment details. We also collect location
+			data which the individual can accept or deny access to. 
+		</p>
+		<br>
+		<h4>Cookies</h4>
+		<br>
+		<p>Our website uses cookies to track and distinguish the users operating our website. This helps provide you with a smooth experience
+			when you use our website, and also allows us to improve our website. 
+		</p>
+		<br>
+		<h4>How we use your data</h4>
+		<br>
+		<p>We use your information strictly for the functionality of the website and to ensure you are able to use our services to its full
+			ability. We do not share data with third parties, and you are able to get the data we gather about you upon request.
+		</p>
+	</div> </div>
+
+	<!--Home Section-->
+	<section id="homePage">
+		<div class="homeText">
+			<h1>Login</h1>
+			<!---->
+			<!---->
+			<!---->
+			<div class="column">
+				<label for="usernameLOGIN">Username:</label>
+				<input type="text" id="usernameLOGIN" name="usernameLOGIN" placeholder="johndoe"><br><br>
+
+				<label for="passwordLOGIN">Password:</label>
+				<input type="password" id="passwordLOGIN" name="passwordLOGIN" placeholder="******"><br><br>
+
+				<label id="submitLOGINlabel" for="submitLOGIN"></label>
+				<button class="medium-btn" type="button" name="submitLOGIN" id="submitLOGIN">Login</button>
+
+				<p> No account? <a href="#signup" style="text-decoration: underline; color: rgb(255, 255, 255);">Create one!</a></p>
+			</div>
+			<!---->
+			<!---->
+			<!---->
+		</div>
+	</section>
+
+	<!--SignUp section-->
+	<section id="signup">
+		<div class="row" id="SIGNUPdiv">
+			<h1>Sign Up</h1>
+			<div class="column">
+				<label for="fname">First name:</label>
+				<input type="text" id="fname" name="fname" placeholder="John"><br><br>
+
+				<label for="sname">Second name:</label>
+				<input type="text" id="sname" name="sname" placeholder="Doe"><br><br>
+
+				<label for="email">Email:</label>
+				<input type="text" id="email" name="email" placeholder="John.doe@email.com"><br><br>
+
+				<label for="phone">Phone:</label>
+				<input type="text" id="phone" name="phone" placeholder="0712345678"><br><br>
+
+				<label for="houseN">House Number:</label>
+				<input type="text" id="houseN" name="houseN" placeholder="42"><br><br>
+
+				<label for="postcode">Postcode:</label>
+				<input type="text" id="postcode" name="postcode" placeholder="AA11BB"><br><br>
+
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" placeholder="johndoe"><br><br>
+			</div>
+			<div class="column">
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" placeholder="******"><br><br>
+
+				<label for="age">Age:</label>
+				<input type="text" id="age" name="age" placeholder="20"><br><br>
+
+				<label for="gender">Gender:</label>
+				<select name="gender" id="gender">
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+					<option value="Other">Other</option>
+					<option value="preferNTS">Prefer not to say</option>
+				</select><br><br>
+
+				<label for="comments">Comments:</label>
+				<textarea placeholder="Type your comment here: Limit is 200 characters." style="resize:none" id="comments" name="comments" rows="5" cols="50" maxlength="200"></textarea><br>
+
+				<label id="submitSIGNUPlabel" for="submitSIGNUP"></label>
+				<button class="medium-btn" type="button" name="submitbookSIGNUP" id="submitSIGNUP">Submit</button>
+
+				<br><br>
+
+				<input type="checkbox" id="privacypolicy" name="privacypolicy" for="privacypolicy"> By ticking this box, you agree to our 
+				<a class="pointer" onclick="togglePopup1()" style="text-decoration: underline; color: rgb(255, 255, 255);">Privacy Policy.</a></p>
+			</div>
+		</div>
+
+	</section>
+</main>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+/* Font Family */
+
+@font-face {
+    font-family: 'AvantGardeGothicC';
+    src: url('../font/AvantGardeGothicC-Demi.woff2') format('woff2'), url('font/AvantGardeGothicC-Demi.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'AvantGardEF';
+    src: url('../font/AvantGardEF-BookCond.woff2') format('woff2'), url('font/AvantGardEF-BookCond.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'AvantGardeGothicC';
+    src: url('../font/AvantGardeGothicC-DemiOblique.woff2') format('woff2'), url('../font/AvantGardeGothicC-DemiOblique.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'AvantGardEF';
+    src: url('../font/AvantGardEF-Book.woff2') format('woff2'), url('font/AvantGardEF-Book.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ITC Avant Garde Gothic';
+    src: url('font/AvantGardeITCbyBT-DemiCondensed.woff2') format('woff2'), url('font/AvantGardeITCbyBT-DemiCondensed.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ITC Avant Garde Gothic';
+    src: url('../font/AvantGardeITCbyBT-DemiOblique.woff2') format('woff2'), url('font/AvantGardeITCbyBT-DemiOblique.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'AvantGardEF';
+    src: url('../font/AvantGardEF-Bold.woff2') format('woff2'), url('font/AvantGardEF-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* Font Face */
+
+body {
+    font-family: 'AvantGardEF';
+    font-weight: normal;
+    font-style: normal;
+    margin: 0;
+    transition: 0.5s font-size;
+    background-color: rgb(255, 255, 255);
+}
+
+h1 {
+    font-family: 'AvantGardEF';
+    font-weight: bold;
+    font-style: normal;
+}
+
+h2,
+h5 {
+    font-family: 'AvantGardEF';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 18px;
+}
+
+.card-text {
+    font-family: 'AvantGardeGothicC';
+    font-weight: 500;
+    font-style: normal;
+    font-size: 42px;
+}
+
+.nav-link {
+    color: #f4f5fe;
+}
+
+.card-title {
+    padding-top: 12px;
+}
+
+#openDaysText {
+    font-family: 'AvantGardEF';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 17px;
+}

@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Bootstrap CSS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <script src="https://kit.fontawesome.com/eda2133c2f.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Map</title>
+
+
+    <!--Bing Maps SDK -->
+    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AivMeRll60yDhOM4ExLXWwgD5889O8UluGTFkPUjcjrCkUH9LNAxG4dtcVGYLZwz' async defer></script>
+
+    <link rel="stylesheet" href="css/map.css">
+
+    <link rel="icon" href="img/favicon.png">
+</head>
+
+
+<body class="p-3 mb-2 text-dark" style="background-color: #f4f5fe;">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #6f47e4;">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img id="RC-logo" src="img/logotemp2.png" alt="Randy.Co Logo" draggable="false" height="30" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link mx-2 text-white" href="#!"><i  class="fa fa-book" aria-hidden="true"></i> Bookings</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link mx-2 text-white" href="/map.html"><i class="fa fa-map-o" aria-hidden="true"></i> Map</a>
+                    </li>
+                    <li class="nav-item ms-3 text-white">
+                        <a class="btn SignOutButton" href="#!" id="logout">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+
+    </br>
+    </br>
+    <h1 id="greeting">Hello </h1>
+
+    <!--Script to display username-->
+    <!--Script to display username-->
+    <script defer>
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+        document.getElementById('greeting').innerText += ' ' + getCookie('username') + '!'
+    </script>
+    <!--Script to display username-->
+    <!--Script to display username-->
+
+    <h1><strong>Campus Map</strong>
+        <h4>Click a parking area to select it. Right click on the map to plot your desired location.</h4>
+    </h1>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="printoutcard" id="printoutPanel"></div>
+            </div>
+            <div class="col">
+                <div id="myMap" style="width:700px;height:500px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="bookingtimeframe">
+        <div class="row justify-content-end" style="padding-bottom: 15px">
+            <div class="col" style="width: 380px; text-align:right;"><strong></strong>Please select a date and time for your booking</strong></div>
+            <div class="col col-3" id="bookings" style="width: 250px"></div>
+            <div class="col col-3" id="bookings2" style="width: 250px"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card ">
+                <div class="card-body">
+                    <img class="iconholder" src="img/car-park.png" />
+                    <h5 class="card-title text-muted">Car park name</h5>
+                    <p class="card-text card-medium-text" id="selectedParkingAreaText">X Car Park</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <img class="iconholder" src="img/pin-map.svg" />
+                    <h5 class="card-title text-muted">Closest car park to your location</h5>
+                    <p class="card-text card-medium-text" id="closestParkingAreaText3">X miles</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <img class="iconholder" src="img/clock.png" />
+                    <h5 class="card-title text-muted">Opening times</h5>
+
+                    <div class="container openingtimes">
+                        <div class="row align-items-start justify-content-start">
+                            <div class="col">Opens at: <strong class="time-card-text" id="opensAtText"> N/A</strong></div>
+                        </div>
+                        <div class="row align-items-start">
+                            <div class="col">Closes at: <strong class="time-card-text" id="closesAtText">N/A</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <img class="iconholder" src="img/calendar.png" />
+                    <h5 class="card-title text-muted">Days open</h5>
+
+                    <div class="container openingtimes">
+                        <div class="row align-items-start">
+                            <div class="col" id="openDaysText"> N/A
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <img class="iconholder" src="img/options.png" />
+                    <h5 class="card-title text-muted">Extra provisions</h5>
+
+                    <div class="container openingtimes">
+                        <div class="row align-items-start justify-content-start">
+                            <div class="col"><i class="fa-solid fa-wheelchair"></i> <strong class="time-card-text" id="disabledParkingText"> N/A</strong></div>
+                        </div>
+                        <div class="row align-items-start">
+                            <div class="col"><i class="fa-solid fa-bolt"></i> <strong class="time-card-text" id="evParkingText"> N/A</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 id="closestParkingAreaToDestination"></h3>
+
+
+        <!-- Reviews -->
+        <div class="container" style="height:700px">
+            <div class="row justify-content-center">
+                <!-- <div class="col"> -->
+
+
+                <div class="review-card" style="background-color: #6f47e4; width:48%; height:700px" id="review">
+                    <div class="card-body" style="padding-bottom:0px">
+                        <h5 class="card-title" style="color:#ffff; padding-left:24px">Reviews</h5>
+                    </div>
+                    <div class="container">
+                        <div id="reviewsContainer" style="overflow:auto;height:600px!important;width:100%;">
+                            <h4>Nothing to show here..</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card" style="background-color: #fff; width: 48%;height:700px; padding-top: 25px;">
+                    <div id="reviewInputDiv">
+
+                        <div id="parkingAreaNameReview">
+                            <h4>No current parking area selected to provide feedback for.</h4>
+                        </div>
+                        <br>
+
+                        <label class="rating-label">Rating
+                        <input id="ratingSlider"
+                            class="rating"
+                            max="5"
+                            oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
+                            step="0.5"
+                            style="--fill: #FFFF00;--symbol:var(--star);--value:1"
+                            type="range"
+                            value="1">
+                        </label>
+
+                        <textarea class="form-control" id="reviewTextBox" rows="4" cols="50" maxlength="100" placeholder="Enter your review here. Max 100 characters." style="resize: none;width:100%;border-radius: 12px;"></textarea>
+                        <br>
+
+                        <button class="btn btn-primary" id="submitReviewButton" disabled>Submit</button>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <small><i>Note: By submitting, you are agreeing to have your review public and visible to others. Reviews are susceptible to moderation. Inappropriate submission containing profanity may lead to the termination of your account.</i></small><br>
+                    </div>
+                    <hr>
+                    <br>
+                </div>
+
+
+            </div>
+        </div>
+
+        <br>        <div id="bookings"></div>
+
+
+        <div id="bookings2"></div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr>
+
+        <div class="container" id="tarmac">
+            <div class="row">
+                <div class="col">
+                    <img id="gate" src="img/toll.png">
+                </div>
+                <div class="col">
+                    <div class="container" id="parking spots" style="color:#6f47e4;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="parking spots">
+            <h4 class="text-muted">Parking spots will show here..</h4>
+        </div>
+        <h4 id="confirm"></h4>
+        <button class="btn btn-primary" id="bookingButton">Book Spot</button>
+
+        <br>
+
+    </div>
+
+
+    <hr>
+        
+
+        <br>
+
+        <!-- <p id="confirm">confirm purchase?</p> -->
+        <br/>
+        <p>Card Number</p>
+        <input type="text" name="cardnumber" id="cardnumber">
+        <br/>
+        <p>CVV</p>
+        <input type="text" name="cvv" id="cvv">
+        <br/>
+        <p>Expirey</p>
+        <select name="expiremm" id="expiremm">
+            <option value="">Month</option>
+            <option value='00'>January</option>
+            <option value='01'>February</option>
+            <option value='02'>March</option>
+            <option value='03'>April</option>
+            <option value='04'>May</option>
+            <option value='05'>June</option>
+            <option value='06'>July</option>
+            <option value='07'>August</option>
+            <option value='08'>September</option>
+            <option value='09'>October</option>
+            <option value='10'>November</option>
+            <option value='11'>December</option>
+        </select>
+        <select name="expireyy" id="expireyy"></select>
+        <br/>
+        <p id="pricing"></p>
+        <!-- <div id="parking spots"></div> -->
+        <!-- <p id="confirm">confirm purchase?</p>
+        <button id="bookingButton">book spot</button> -->
+
+        <hr>
+
+        <input type="text" id="enterbookingid" name="enterbookingid" placeholder="Enter your booking ID">
+        <button class="medium-btn" id="notifyArrival">Notify Arrival</button>
+        <button class="medium-btn" id="notifydeparture">Notify departure</button>
+        <br/>
+        <div id="displayingOfBookings"></div>
+
+           <!--Code for emailing Admins from users-->
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 23rem !important;">
+                    <div class="card-body">
+                        <h5 class="card-title">Here you can communicate with Admins by messaging them. They will recieve your message below in Email form:</h5>
+                        <textarea class="form-control" id="userMessageTextArea" name="userMessageTextArea" rows="10" cols="40" style="resize: none;"></textarea>
+                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <label id="submitUSERmessageLabel" for="submitUSERmessage"></label>
+    <button class="medium-btn btn btn-primary" type="button" name="submitUSERmessage" id="submitUSERmessage">Submit message</button>
+
+    <hr>
+
+
+    <!--Code for users to request data held about them-->
+
+    <h3><u>Under GDPR laws you have every right to request information we hold about you in this account. You can request it below: </u></h3>
+
+    <label id="requestLabel" for="request"></label>
+    <button class="medium-btn" type="button" name="request" id="request">Request my data</button>
+
+    <hr>
+
+    <!--Code for users to delete their accounts-->
+
+    <h3><u>If you wish to permanently delete your account, proceed below.</u></h3>
+
+    <div style="display: inline-block">
+
+        <label> Remember that if you press "Delete", your account will be permanently deleted and cannot be restored. You will also be automatically signed out. <br>
+			
+		<br><label id="submitDELETEMYSELFLabel" for="submitDELETEMYSELF"></label>
+        <button class="medium-btn" type="button" name="submitDELETEMYSELF" id="submitDELETEMYSELF">Delete</button>
+
+    </div>
+
+    <hr>
+
+
+        <!-- Bootstrap Bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+<script type='text/javascript' async defer>
+    allSpots = document.getElementById("parking spots");
+
+    class parkingAreaObject {
+
+        constructor(latitude, longitude, title) {
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.title = title;
+            this.parkingSpots = [];
+            this.parkingSpotButtons = [];
+        }
+
+        getLat() {
+            return this.latitude;
+        }
+
+        getLong() {
+            return this.longitude;
+        }
+
+        getTitle() {
+            return this.title;
+        }
+    };
+
+    class ParkingSpot {
+        constructor(name, isOccupied, isDisabledSpot, hasElectricCharging, isReserved) {
+            this.name = name;
+            this.isOccupied = isOccupied;
+            this.isDisabledSpot = isDisabledSpot;
+            this.hasElectricCharging = hasElectricCharging;
+            this.isReserved = isReserved;
+
+        }
+
+        getName() {
+            return this.name;
+        }
+    }
+
+
+    function addPPIndicator(btn, imagePath, altName) { //PP = Parking Spot
+        //Icon
+        let img = document.createElement("img");
+        img.classList = "spotIndicator"
+
+        img.setAttribute('src', imagePath);
+        img.setAttribute('alt', altName);
+
+        btn.appendChild(img)
+
+        return img
+    }
+
+
+    function createButtons(selectedParkingArea, amount) 
+    {
+
+        allSpots.innerHTML = ' ';
+        let row = document.createElement("div");
+        row.setAttribute("id", "row");
+
+        for (let i = 0; i < amount; i++) {
+            if (i % 3 == 0) {
+                row = document.createElement("div");
+                row.setAttribute("id", "row");
+                allSpots.appendChild(row);
+            }
+            let btn = document.createElement("button");
+            // btn.style.position = 'relative'
+            ind = i + 1
+                // btn.innerHTML = "Parking Spot " + ind;
+            btn.setAttribute("id", i);
+            btn.classList += "spot";
+            btn.classList += " col";
+            btn.classList += " parkingSpotButton"
+
+            // btn.style.cssText += 'data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">Tooltip on top'
+
+            btn.setAttribute("data-bs-toggle", "tooltip");
+            btn.setAttribute("data-bs-placement", "top");
+            //For tooltip title go down to next if statement
+
+            // btn.setAttribute("borderRadius", "8px");
+            // btn.setAttribute("textAlign", "center");
+            // btn.setAttribute("borderStyle", "none");
+            // btn.setAttribute("height", "15px");
+            // btn.setAttribute("width", "180px");
+            // btn.style.width = '170px'
+            // btn.style.paddingTop = 'auto';
+            // btn.style.paddingBottom = 'auto';
+
+
+            if (selectedParkingArea.parkingSpots[i].isOccupied || selectedParkingArea.parkingSpots[i].isReserved) {
+                btn.classList += " occupied";
+
+                if (selectedParkingArea.parkingSpots[i].isDisabledSpot) {
+                    btn.setAttribute("title", "Occupied + Disabled Spot");
+                    addPPIndicator(btn, '../../img/car_red_disabled.png', "occupied disabled image")
+                } else if (selectedParkingArea.parkingSpots[i].hasElectricCharging) {
+                    btn.setAttribute("title", "Occupied + Electric Spot");
+                    addPPIndicator(btn, '../../img/car_red_lightning.png', "occupied electric image")
+                } else {
+                    btn.setAttribute("title", "Occupied Spot");
+                    addPPIndicator(btn, "../../img/caroccupied.png ", "car occupied image")
+                }
+
+            } else {
+                btn.classList += " unoccupied";
+
+                if (selectedParkingArea.parkingSpots[i].isDisabledSpot) {
+                    btn.setAttribute("title", "Unoccupied + Disabled Spot");
+                    addPPIndicator(btn, '../../img/car_blue_disabled.png', "unoccupied disabled image")
+                } else if (selectedParkingArea.parkingSpots[i].hasElectricCharging) {
+                    btn.setAttribute("title", "Unoccupied + Electric Spot");
+                    addPPIndicator(btn, '../../img/car_blue_lightning.png', "unoccupied electric image")
+                } else {
+                    btn.setAttribute("title", "Unoccupied Spot");
+                    addPPIndicator(btn, "../../img/carunoccupied.png ", "car unoccupied image")
+                }
+            }
+            if (selectedParkingArea.parkingSpots[i].isDisabledSpot) {
+                btn.classList += " disabled";
+            }
+            if (selectedParkingArea.parkingSpots[i].hasElectricCharging) {
+                btn.classList += " electric";
+            }
+
+            //Enables Tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+
+
+            row.appendChild(btn);
+            //Text
+            p = document.createElement("h3");
+            p.style.color = "#FFFF"
+            p.innerHTML = ind;
+            btn.appendChild(p)
+            p.classList = "parkingSpotText"
+
+            p.style.position = 'relative'
+            p.style.width = "60%";
+            p.style.height = "100%";
+            // p.style.float = "right"
+            p.style.display = 'inline';
+            // p.style.linehei = '50%'
+            // p.style.lineHeight
+
+        }
+        console.log("PASSED: parking spot buttons successfully generated")
+            //parkingArea.isDisplayed = true;
+    }
+    allParkingAreas = []
+        //joey use these variables for your booking functionalites, they wont be null once selected
+    currentSelectedParkingArea = null;
+    currentSelectedParkingSpot = null;
+    var map;
+    let selectStartTime;
+    let selectEndTime;
+    let selectEndDate;
+    let selectStartDate;
+    let currentParkingAreaName;
+    let openingTime;
+    let closingTime;
+    let qs;
+    let qa;
+    let depd;
+    let arrd;
+    let fullyear;
+
+    var expire = document.getElementById("expireyy");
+
+    for(let i = 0; i < 4; i++)
+    {
+        var x = document.createElement("option");
+        var d = new Date().getFullYear();
+        d = (d + i).toString().slice(-2);
+        x.text = d;
+        expire.add(x, x[0]);
+    }
+
+    $('#cardnumber').mask("9999 9999 9999 9999");
+    $('#cvv').mask("999");
+
+    // document.getElementById("myMap").hidden = true;
+
+    function GetMap() {
+        //map camera bounds
+        var bounds = Microsoft.Maps.LocationRect.fromLocations(new Microsoft.Maps.Location(52.620435402508356, 1.221517109457411), new Microsoft.Maps.Location(52.62747041534185, 1.2476830255518254));
+
+        //map configuration
+        map = new Microsoft.Maps.Map('#myMap', {
+            //maxBounds: bounds,
+            showLocateMeButton: false,
+            showMapTypeSelector: false,
+            enableClickableLogo: false,
+            disableKeyboardInput: false,
+        });
+        map.setOptions({
+            //minZoom: 15,
+            minZoom: 1,
+            maxZoom: 17
+        });
+        map.setView({
+            mapTypeId: Microsoft.Maps.MapTypeId.road,
+            center: new Microsoft.Maps.Location(52.62201955831304, 1.2392874601292663),
+            zoom: 14
+        });
+
+        function getUserLatitude() {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                return position.coords.latitude;
+            })
+        }
+
+        var userLocation;
+        var locationofuser;
+
+        //request user's location
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var loc = new Microsoft.Maps.Location(position.coords.latitude, position.coords.longitude);
+
+            //add pushpin at user's location.
+            userLocation = new Microsoft.Maps.Pushpin(loc, {
+                title: 'You',
+                icon: 'img/userLocationIcon.png'
+            });
+            map.entities.push(userLocation);
+
+        });
+
+        let closestDistance = 0;
+        let closestParkingAreaName = "";    
+
+        var submittedPin = false
+        var reqPin;
+        var closestDistanceToRequestedDestination = 0;
+        var closestParkingAreaNameToRequestedDestination = "";
+        let text = document.getElementById('closestParkingAreaToDestination');
+
+        var bookingDiv = document.getElementById("bookings");
+        var booking2Div = document.getElementById("bookings2");
+
+        function onSubmitPin(e) {
+
+            if(e.targetType== "map") {
+
+                if(submittedPin == false) {
+                    submittedPin = true;
+                    let point = new Microsoft.Maps.Point(e.getX(), e.getY());
+                    let locTemp = e.target.tryPixelToLocation(point);
+                    let requestedLocation = new Microsoft.Maps.Location(locTemp.latitude, locTemp.longitude);
+
+                    reqPin = new Microsoft.Maps.Pushpin(requestedLocation, {
+                        title: 'Requested Destination',
+                        icon: 'img/destinationIcon.png'
+                    });
+
+                    map.entities.push(reqPin);
+
+                    
+
+                    for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                        var pushpin = map.entities.get(i);
+                        if (pushpin instanceof Microsoft.Maps.Pushpin) {
+                            if(pushpin == reqPin) {
+                                //console.log("Found users requested location");
+                            }
+                            else if(pushpin == userLocation) {
+                                //console.log("Found user's location");
+                            }
+                            else {
+                                
+                                function roundToTwo(num) {
+                                    return +(Math.round(num + "e+2") + "e-2");
+                                }
+
+                                Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function() {
+                                    var currentDistanceBetweenUserReqAndPA = Microsoft.Maps.SpatialMath.getDistanceTo(reqPin.getLocation(), pushpin.getLocation(), Microsoft.Maps.SpatialMath.DistanceUnits.Miles);
+                                    //console.log(currentDistanceBetweenUserReqAndPA);
+
+                                    if(closestDistanceToRequestedDestination == 0) {
+                                        closestDistanceToRequestedDestination = currentDistanceBetweenUserReqAndPA;
+                                        closestParkingAreaNameToRequestedDestination = pushpin.getTitle();
+                                    }
+
+                                    else {
+                                        if(closestDistanceToRequestedDestination > currentDistanceBetweenUserReqAndPA) {
+                                            closestDistanceToRequestedDestination = currentDistanceBetweenUserReqAndPA;
+                                            closestParkingAreaNameToRequestedDestination = pushpin.getTitle();
+                                        }
+                                    }
+                                    text.innerHTML = "Closest parking area to your desired location is " + closestParkingAreaNameToRequestedDestination + ", distance of " + roundToTwo(closestDistanceToRequestedDestination) + " miles";
+             
+                                });
+
+
+                            }
+                        }
+                    }
+
+                }
+
+                else if(submittedPin == true) {
+                    submittedPin = false;
+                    for (var i = map.entities.getLength() - 1; i >= 0; i--) {
+                        var pushpin = map.entities.get(i);
+                        if (pushpin instanceof Microsoft.Maps.Pushpin) {
+                            if(pushpin == reqPin) {
+                                map.entities.remove(pushpin);
+                                submittedPin == false;
+                                text.innerHTML = "";
+                                closestDistanceToRequestedDestination = 0;
+                                closestParkingAreaNameToRequestedDestination = "";
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        Microsoft.Maps.Events.addHandler(map, 'rightclick', onSubmitPin);
+
+        //this prevents the page from creating multiple elements.
+        while(bookingDiv.firstChild)
+        {
+            bookingDiv.removeChild(bookingDiv.firstChild);
+        }
+
+            selectStartDate = document.createElement("input");
+            selectStartDate.type = "date";
+            selectStartDate.required; 
+            selectStartDate.id = "startdate";
+            selectStartDate.name = "startdate";
+            document.getElementById("bookings").appendChild(selectStartDate);
+
+            selectStartTime = document.createElement("input");
+            selectStartTime.type = "time";
+            selectStartTime.required;
+            selectStartTime.id = "startTime";
+            selectStartTime.name = "startTime";
+            selectStartTime.min = document.getElementById("opensAtText").innerHTML;
+            selectStartTime.max = document.getElementById("closesAtText").innerHTML;
+            document.getElementById("bookings").appendChild(selectStartTime);
+
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("startdate")[0].setAttribute('min', today);
+
+        var nextWeek = new Date();
+        nextWeek.setDate(nextWeek.getDate() + 9);
+
+        var nextWeek2 = new Date(nextWeek).toISOString().split('T')[0];
+        document.getElementsByName("startdate")[0].setAttribute('max', nextWeek2);
+
+        // if(selectStartTime)
+
+        selectEndDate = document.createElement("input");
+        selectEndTime = document.createElement("input");
+
+        while(booking2Div.firstChild)
+        {
+            booking2Div.removeChild(booking2Div.firstChild);
+        }
+
+        selectStartDate.onchange = function selectingStart()
+        {
+            if(selectStartTime.value == "")
+            {
+                alert('You must select a time first');
+                selectStartDate.value = "";
+            }
+            else if(selectStartDate.value != "" && selectStartTime.value != "")
+            {
+                console.log("elseeeeeeeeeeeeeeeeeeeeee");
+                console.log("ONCHANGE START PRINTING");
+                
+                selectEndDate.type = "date";
+                selectEndDate.required;
+                selectEndDate.id = "endDate";
+                selectEndDate.name = "endDate";
+                document.getElementById("bookings2").appendChild(selectEndDate);
+                
+                selectEndTime.type = "time";
+                selectEndTime.required;
+                selectEndTime.id = "endTime";
+                selectEndTime.name = "endTime";
+                selectEndTime.min = document.getElementById("opensAtText").innerHTML;
+                selectEndTime.max = document.getElementById("closesAtText").innerHTML;
+                document.getElementById("bookings2").appendChild(selectEndTime);
+
+            console.log(document.getElementById("startdate").value);
+            var startDuration = new Date(document.getElementById("startdate").value).toISOString().split('T')[0];
+            selectEndDate.setAttribute('min', startDuration);
+
+            var endDuration = new Date(selectStartDate.value);
+            endDuration.setDate(endDuration.getDate() + 9);
+            endDuration.toISOString().split('T')[0];
+
+            var end2Durations = new Date(endDuration).toISOString().split('T')[0];
+            selectEndDate.setAttribute('max', end2Durations);
+            console.log(selectStartTime);
+            }                                    
+        }
+
+        selectEndDate.onchange = async function()
+        {
+            arrd = new Date(document.getElementById('startdate').valueAsDate);
+            var arrt;
+            depd = new Date(document.getElementById('endDate').valueAsDate);
+            var dept;
+            fullyear = new Date(arrd.getFullYear(), 0, 0);
+            qs = new Date(selectEndTime.valueAsDate);
+            qa = new Date(selectStartTime.valueAsDate);
+
+            let dateTimeData = 
+            {
+                arrivalDate: document.getElementById('startdate').value,
+                arrivalTime: document.getElementById('startTime').value,
+                departureDate: document.getElementById('endDate').value,
+                departureTime: document.getElementById('endTime').value
+            }
+
+            console.log(document.getElementById('startTime').value);
+
+            console.log("PASSING DATETIMEDATA "+ document.getElementById('endDate').value);
+        }
+
+        console.log("eubdiuwdwd"+selectEndDate);
+
+            //use fetch api to retrieve database content
+                fetch('/ParkingAreaDB.json').then((response) => {
+                    return response.json();
+                }).then(data => {
+                    //set up directions manager for the map
+                    Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function() {
+                        let directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+
+                        for (var i in data) {
+                            try {
+
+                                //attributes from data i
+                                let lat = data[i].latitude;
+                                let long = data[i].longitude;
+                                let currentParkingAreaName = data[i].parkingAreaName;
+                                let openingTime = data[i].openingTime;
+                                let closingTime = data[i].closingTime;
+                                let daysOpen = data[i].daysOpen;
+                                let dpBoolean = data[i].disabledSpotsBoolean;
+                                let evBoolean = data[i].evSpotsBoolean;
+                                let reviewsArray = data[i].reviews;
+
+                                parkingArea = new parkingAreaObject(data[i].lat, data[i].long, currentParkingAreaName)
+                                    //adding all the parking spot objects to the parking area
+                                for (let j = 0; j < data[i].parkingSpots.length; j++) {
+                                    var object = data[i].parkingSpots[j];
+                                    //setting intial values for parking spot loading
+                                    parkingSpotName = "";
+                                    parkingSpotOccupied = false;
+                                    parkingSpotElectric = false;
+                                    parkingSpotDisabled = false;
+                                    parkingSpotReserved = false;
+
+                                    //here it goes through all the parking spot attributes in the parking spot array
+                                    for (var ele in object) {
+                                        if (ele == "name") {
+                                            parkingSpotName = object[ele];
+                                        } else if (ele == "isOccupied") {
+                                            parkingSpotOccupied = object[ele];
+                                        } else if (ele == "isDisabledSpot") {
+                                            parkingSpotDisabled = object[ele];
+                                        } else if (ele == "hasElectricCharging") {
+                                            parkingSpotElectric = object[ele];
+                                        } else if (ele == "isReserved") {
+                                            parkingSpotReserved = object[ele];
+                                        }
+
+                                    }
+                                    parkingSpot = new ParkingSpot(parkingSpotName, parkingSpotOccupied, parkingSpotDisabled, parkingSpotElectric, parkingSpotReserved);
+                                    parkingArea.parkingSpots.push(parkingSpot);
+                                }
+
+                                //pushing the parking area into the array that stores all parking areas
+                                allParkingAreas.push(parkingArea);
+
+                                //pushpin object to plot the current parking area onto the map
+                                let customPin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(data[i].lat, data[i].long), {
+                                    title: currentParkingAreaName,
+                                    icon: 'img/carParkIcon.png'
+                                })
+
+                                //calculate closest parking area to user's current location
+                                Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function() {
+                                    var distanceBetweenUserAndCurrentParkingArea = Microsoft.Maps.SpatialMath.getDistanceTo(userLocation.getLocation(), customPin.getLocation(), Microsoft.Maps.SpatialMath.DistanceUnits.Miles);
+                                    if (closestDistance == 0) {
+                                        closestDistance = distanceBetweenUserAndCurrentParkingArea;
+                                        closestParkingAreaName = currentParkingAreaName;
+                                    } else {
+                                        if (distanceBetweenUserAndCurrentParkingArea < closestDistance) {
+                                            closestDistance = distanceBetweenUserAndCurrentParkingArea;
+                                            closestParkingAreaName = currentParkingAreaName;
+                                        }
+                                    }
+
+
+                                    function roundToTwo(num) {
+                                            return Math.round(num * 100) / 100;
+                                        }
+                                    
+                                        
+                                    document.getElementById('closestParkingAreaText3').innerHTML = closestParkingAreaName + " " + roundToTwo(closestDistance) + " miles";
+                                });
+
+                                //set up routing between user's location and the parking area they select
+                                Microsoft.Maps.Events.addHandler(customPin, 'click', function() {
+                                        directionsManager.setRequestOptions({
+                                            routeMode: Microsoft.Maps.Directions.RouteMode.driving
+                                        });
+                                        navigator.geolocation.getCurrentPosition(function(position) {
+                                            let waypoint1 = new Microsoft.Maps.Directions.Waypoint({
+                                                address: 'Start',
+                                                location: new Microsoft.Maps.Location(position.coords.latitude, position.coords.longitude)
+                                            });
+                                            let waypoint2 = new Microsoft.Maps.Directions.Waypoint({
+                                                address: 'Finish',
+                                                location: customPin.getLocation()
+                                            });
+
+                                            //clear any old routes and waypoints
+                                            directionsManager.clearAll();
+                                            directionsManager.clearDisplay();
+
+                                            //add the new waypoints between start and finish
+                                            directionsManager.addWaypoint(waypoint1);
+                                            directionsManager.addWaypoint(waypoint2);
+
+                                            //set the element in which the itinerary will be rendered
+                                            //document.getElementById('printoutPanel').style = "height: 500px; width: 500px; overflow: auto;"
+                                            document.getElementById('printoutPanel').style = "height: 400px; overflow: auto;"
+                                            directionsManager.setRenderOptions({
+                                                itineraryContainer: document.getElementById('printoutPanel')
+                                            });
+                                            directionsManager.calculateDirections();
+                                        });
+
+
+                                        //display information about the current selected parking area
+                                        document.getElementById('selectedParkingAreaText').innerHTML = currentParkingAreaName;
+                                        document.getElementById('opensAtText').innerHTML = openingTime;
+                                        document.getElementById('closesAtText').innerHTML = closingTime;
+
+                                        document.getElementById('openDaysText').innerHTML = "";
+                                        for (var i in daysOpen) {
+
+                                            console.log(i)
+                                            let add = ", ";
+                                            if (i == daysOpen.length - 1) {
+                                                add = ".";
+                                            } else if (i == daysOpen.length - 2) {
+                                                add = " and "
+                                            }
+
+                                            document.getElementById('openDaysText').innerHTML = document.getElementById('openDaysText').innerHTML + daysOpen[i] + add;
+                                        }
+
+                                        if (dpBoolean == true) {
+                                            document.getElementById('disabledParkingText').innerHTML = "Yes";
+                                        }
+                                        if (dpBoolean == false) {
+                                            document.getElementById('disabledParkingText').innerHTML = "No";
+                                        }
+                                        if (evBoolean == true) {
+                                            document.getElementById('evParkingText').innerHTML = "Yes";
+                                        }
+                                        if (evBoolean == false) {
+                                            document.getElementById('evParkingText').innerHTML = "No";
+                                        }
+
+                                        document.getElementById('parkingAreaNameReview').innerHTML = "Fancy providing feedback about " + currentParkingAreaName + "? Submit a review here:"
+                                        document.getElementById('submitReviewButton').disabled = false
+
+                                        var reviewDiv = document.getElementById('reviewsContainer');
+                                        reviewDiv.setAttribute("style", "overflow:auto;height:300px;width:526px");
+
+                                        while (reviewDiv.firstChild) {
+                                            reviewDiv.removeChild(reviewDiv.firstChild);
+                                        }
+
+                                        for (var i in reviewsArray) {
+                                            let currentReview = reviewsArray[i].review;
+                                            let currentRating = reviewsArray[i].reviewRating;
+                                            let currentReviewUser = reviewsArray[i].nameOfUser;
+                                            let currentUsername = reviewsArray[i].userID;
+                                            let currentFlaggedStatus = reviewsArray[i].flagged;
+
+                                            let div = document.createElement("div");
+                                            let br = document.createElement("br");
+
+
+                                            let reportButton = document.createElement("button");
+                                                reportButton.innerHTML = "Report";
+                                                reportButton.style.float = "right"
+                                                reportButton.style.width = "25%"
+                                                reportButton.style.height = "40%"
+                                                    // reportButton.style.padding = "4px"
+                                                reportButton.style.backgroundColor = "red"
+                                                reportButton.style.borderRadius = "7px";
+                                                reportButton.classList += "reportbutton";
+                                                reportButton.style.textAlign = "center";
+
+
+                                                div.classList += " review"
+                                                div.style.width = "90%";
+                                                // div.style.height = "80px";
+                                                div.style.color = "white";
+                                                // div.style.border = "solid #FFF";
+                                                // div.style.borderRadius = "17px";
+                                                div.style.padding = "2px";
+
+                                                const reviewBody = `<strong>${currentReviewUser}</strong> <br/>Rating: ${currentRating} <br/> ${currentReview}`;
+
+                                                div.innerHTML = reviewBody;
+
+                                            if (currentRating == "0/5" || currentRating == "0.5/5" || currentRating == "1/5") {
+                                                div.style.background = "#FF4444"; //red
+                                            } else if (currentRating == "1.5/5" || currentRating == "2/5" || currentRating == "2.5/5") {
+                                                div.style.background = "#FFB928"; //amber
+                                            } else {
+                                                div.style.background = "#2DBE26"; //green
+                                            }
+
+                                            reportButton.addEventListener("click", async function() {
+                                                alert(`This review will be moderated by admins. You have reported the review: ${currentReview}`);
+
+                                                let data = {
+                                                    currentReview,
+                                                    currentRating,
+                                                    currentReviewUser,
+                                                    currentUsername,
+                                                    currentFlaggedStatus,
+                                                    currentParkingAreaName
+                                                };
+
+                                                const options = {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'Content-Type': 'application/json'
+                                                    },
+                                                    body: JSON.stringify(data)
+                                                };
+
+                                                const response = await fetch('/flagReview', options);
+                                                const responseBody = await response.json()
+                                                alert(responseBody.message);
+                                            })
+
+                                            div.appendChild(reportButton);
+                                            document.getElementById('reviewsContainer').appendChild(div);
+                                            document.getElementById('reviewsContainer').appendChild(br);
+
+
+                                        }
+
+
+                                        for (let i = 0; i < allParkingAreas.length; i++) {
+                                            //if the one clicked on is the parking area, then display parking slots for that
+                                            if (allParkingAreas[i].title == currentParkingAreaName) {
+                                                currentSelectedParkingArea = allParkingAreas[i];
+                                                createButtons(allParkingAreas[i], allParkingAreas[i].parkingSpots.length);
+                                                document.getElementById("confirm").innerHTML = "";
+                                                bookingButton.style.display = 'none';
+                                                currentSelectedParkingSpot = null;
+                                            }
+
+                                        }
+
+                                    })
+                                
+                                    
+
+                                    //push the parking area pushpin onto the map
+                                map.entities.push(customPin);
+                            } catch (ex) {
+                                console.log(ex);
+                            }
+                        }
+                    });
+                }).catch((err) => {
+                    console.log(err);
+                });
+    }
+
+
+        // Draw Lines
+
+        function getOffset(el) {
+            const rect = el.getBoundingClientRect();
+            return {
+                left: rect.left + window.pageXOffset,
+                top: rect.top + window.pageYOffset,
+                width: rect.width || el.offsetWidth,
+                height: rect.height || el.offsetHeight
+            };
+        }
+
+        function connect(div1, div2, color, thickness) {
+            let line = document.getElementById('line2');
+
+            if (line) {
+                line.remove();
+            }
+            const off1 = getOffset(div1);
+            const off2 = getOffset(div2);
+
+            const x1 = off1.left + (off1.width / 2);
+            const y1 = off1.top + (off1.height / 2);
+
+            const x2 = off2.left + (off2.width / 2);
+            const y2 = off2.top + (off2.height / 2);
+
+            const length = Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+
+            const cx = ((x1 + x2) / 2) - (length / 2);
+            const cy = ((y1 + y2) / 2) - (thickness / 2);
+
+            const angle = Math.atan2((y1 - y2), (x1 - x2)) * (180 / Math.PI);
+
+            let line2 = document.createElement("div");
+            line2.setAttribute('id', 'line2');
+            line2.style.padding = '0px';
+            line2.style.margin = '0px';
+            line2.style.height = thickness + "px";
+            line2.style.backgroundColor = color;
+            line2.style.lineHeight = '1px';
+            line2.style.position = 'absolute';
+            line2.style.left = cx + "px";
+            line2.style.top = cy + "px";
+            line2.style.width = length + "px";
+
+            line2.style.cssText += "-moz-transform:rotate(" + angle + "deg); -webkit-transform:rotate(" + angle + "deg); -o-transform:rotate(" + angle + "deg); -ms-transform:rotate(" + angle + "deg); transform:rotate(" + angle + "deg);"
+
+            document.body.appendChild(line2)
+        }
+        // Draw Lines
+
+        var spotClickedIndex = 0;
+        //this code deals with a parking spot being selected
+        allSpots.addEventListener('click', (e) => {
+            if (e.target.classList.contains('spot')) {
+                index = e.target.id;
+
+                let bookingButton = document.getElementById('bookingButton');
+                currentSelectedParkingSpot = currentSelectedParkingArea.parkingSpots[index]
+                const spotName = currentSelectedParkingSpot.name;
+
+                if (!currentSelectedParkingSpot.isOccupied && !currentSelectedParkingSpot.isReserved) {
+                    console.log("PASSED: user can select and book an unoccupied spot")
+                    document.getElementById("confirm").innerHTML = "confirm booking at - " + spotName + "?";
+                    bookingButton.style.display = 'initial';
+
+                    // Draw Line
+                    const d1 = document.getElementById('gate')
+                    const d2 = e.target
+                    connect(d1, d2, 'green', 5)
+
+
+                } else {
+                    console.log("PASSED: user cannot book a spot that is occupied or reserved")
+                    document.getElementById("confirm").innerHTML = spotName + " is occupied or reserved, please select another spot";
+                    bookingButton.style.display = 'none';
+                }
+
+            }
+
+        });
+
+
+        
+function loadAllUserBookings(div)
+{
+    //use fetch api to retrieve database content
+    fetch('/bookings/booked.json').then((response) => {
+        return response.json();
+    }).then(data => {
+        for(var i in data) {
+            try {
+                if(getCookie('username') == data[i].username)
+                {
+                    let currentBooking = data[i];
+
+                    let username = data[i].username;
+                    let areaname = data[i].parkingareaname;
+                    let parkingspace = data[i].parkingspace;
+                    let arrivalDate = data[i].arrivaldate;
+                    let arrivalTime = data[i].arrivaltime;
+                    let departureDate = data[i].departuredate;
+                    let departureTime = data[i].departuretime;
+                    let arrival = data[i].notifyArrival;
+                    let depart = data[i].notifyDepart;
+                    let approval = data[i].approved;
+
+                    if(approval != "deny")
+                    {
+                        div.innerHTML = div.innerHTML + i + ". Username: " + username + " |  ParkingAreaName:  "
+                        + areaname + " |  ParkingSpot: "
+                        + parkingspace + "| ArrivalDate: "
+                        + arrivalDate + " |  ArrivalTime: "
+                        + arrivalTime + " |  departureDate: "
+                        + departureDate + " |  departureTime: "
+                        + departureTime + " |  Approval: "
+                        + approval + " | Arrived: " + "<br/>" + "<br/>";
+                    }
+
+                }
+            }
+            catch(ex) {
+                console.log(ex);
+            }
+        }
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+document.getElementById('bookingButton').onclick = async function()
+{
+for(let i = 0; i < allParkingAreas.length; i++)
+{
+    if(currentSelectedParkingArea == allParkingAreas[i])
+    {
+        if(currentSelectedParkingSpot == allParkingAreas[i].parkingSpots[i])
+        {
+            allParkingAreas[i].parking;
+        }
+    }
+}
+
+console.log(selectEndDate.value);
+if(selectEndTime.value == "")
+{
+    alert('You must select a valid time');
+    selectEndDate.value = "";
+}
+else if(selectEndDate.value == selectStartDate.value && selectEndTime.value < selectStartTime.value)
+{
+    alert('select a later time or later day');
+    selectEndDate.value = "";
+}
+else if(selectEndDate < selectStartDate)
+{
+    alert('select a later departure date');
+    selectEndDate.value = "";
+}
+else if(selectEndDate.value == "")
+{
+    alert('select a departure date');
+    selectEndDate.value = "";
+}
+else
+{
+
+    while(document.getElementById("pricing").firstChild)
+    {
+        document.getElementById("pricing").removeChild(document.getElementById("pricing").firstChild);
+    }
+
+    var createpricing = document.getElementById("pricing");
+    var createpricingval;
+    var amountofhours = qs.getUTCHours() - qa.getUTCHours();
+
+    if(selectStartDate.value == selectEndDate.value)
+    {
+        // var ne = depd.setTime(selectEndTime.value);
+        console.log(depd);
+        // console.log(ne);
+        qs.setFullYear(depd.getFullYear());
+        qs.setMonth(depd.getDay());
+        qs.setDate(depd.getDate());
+        console.log(qs.getUTCDay());
+        console.log(qs.getUTCHours() - qa.getUTCHours());
+        console.log(qs.getUTCDate());
+        console.log(qs.getMonth())
+        console.log(selectEndDate);
+        console.log(selectEndTime.valueAsDate);
+        console.log("AWDQWDWDAWDAWDAWWDAWDAWDWDWDWDDWDWDWDWWDWD BABOOE");
+
+        var aaa = selectEndTime.value;
+        console.log(aaa - selectStartTime.value);
+        console.log(selectEndTime.valueAsNumber % selectStartTime.valueAsNumber);
+        console.log(selectEndTime.value + 1);
+        createpricing.innerHTML = "£" + amountofhours + ".00";
+        createpricingval = amountofhours;
+    }
+    else if(selectEndDate.value > selectStartDate.value)
+    {
+        var diff = depd - fullyear;
+        var oneday = 1000*60*60*24;
+        var diff2 = arrd - fullyear;
+        var dayscalculate = Math.floor(diff / oneday) - Math.floor(diff2 / oneday);
+        
+        createpricing.innerHTML = "dwadawdawdawdawdawd";
+        console.log("Amount of Days : " + dayscalculate);
+
+        createpricing.innerHTML = "£" + dayscalculate*10 + ".00";
+        createpricingval += dayscalculate*10;
+    }
+    // window.location.reload()
+    console.log(expire.options[expire.selectedIndex].value);
+
+
+    
+}
+
+    console.log(currentSelectedParkingArea);
+
+    console.log($('#cardnumber').val());
+    if($('#cardnumber').val() == "")
+    {
+        alert("fill in card number details");
+    }
+    else if($('#cvv').val() == "")
+    {
+        alert("fill in cvv details");
+    }
+    else if(document.getElementById("expiremm").options[document.getElementById("expiremm").selectedIndex].value == "")
+    {
+        alert("select a valid expiry month");
+    }
+    else
+    {
+
+        let data = 
+        {
+            username: getCookie('username'),
+            parkingareaname: currentSelectedParkingArea.getTitle(),
+            parkingspace: currentSelectedParkingSpot.getName(),
+            disabled: currentSelectedParkingSpot.isDisabledSpot,
+            electric: currentSelectedParkingSpot.hasElectricCharging,
+            arrivaldate: document.getElementById("startdate").value,
+            arrivaltime: document.getElementById("startTime").value,
+            departuredate: document.getElementById("endDate").value,
+            departuretime: document.getElementById("endTime").value,
+            price: createpricingval.value,
+            cardNumber: $('#cardnumber').val(),
+            cvv: $('#cvv').val(),
+            expirymonth: document.getElementById("expiremm").options[document.getElementById("expiremm").selectedIndex].value,
+            expiryyear: expire.options[expire.selectedIndex].value,
+            approved: "unkown",
+            notifyArrival: false,
+            notifyDepart: false
+        }
+        console.log(data);
+
+        const newbooking = await fetch('/newBooking', 
+        {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        const response = await newbooking.json()
+
+        if(response.success == true)
+        {
+            alert(response.message);
+        }
+        else
+        {
+            alert(response.message);
+        }
+
+        location.reload();
+    }
+
+}
+                    
+
+
+const divdisplaybookings = document.getElementById("displayingOfBookings");
+loadAllUserBookings(divdisplaybookings);
+
+const idofbooking = document.getElementById("enterbookingid");
+
+console.log(getCookie('username').toString());
+
+document.getElementById("notifyArrival").onclick = function() 
+{
+    console.log(idofbooking.value);
+
+    if(idofbooking.value == "" || idofbooking.value == null || idofbooking.value == undefined)
+    {
+        alert("Please enter a valid booking id");
+    }
+    else
+    {
+        const coordinates = navigator.geolocation.getCurrentPosition(async function(position)
+        {
+            console.log(position.coords.latitude);
+            var userlat = position.coords.latitude;
+            var userlong = position.coords.longitude;
+
+            let parsedata = 
+            {
+                id: idofbooking.value,
+                arrival: true,
+                username: getCookie('username').toString(),
+                usercoordinateslong: userlong,
+                usercoordinateslat: userlat
+            }
+
+            const response = await fetch('/usernotfiyarrival', 
+            {
+                method: 'POST',
+                headers: 
+                {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(parsedata)
+            });
+
+            const serverResponse = await response.json()
+
+            console.log(serverResponse)
+
+            if (serverResponse.success == false) 
+            {
+                alert(serverResponse.message)
+                return
+            }
+
+            return position.coords.latitude;
+        });
+    }
+}
+
+//this is for departure
+document.getElementById("notifydeparture").onclick = async function() 
+{
+    console.log(idofbooking.value);
+
+    if(idofbooking.value == "" || idofbooking.value == null || idofbooking.value == undefined)
+    {
+        alert("Please enter a valid booking id");
+    }
+    else
+    {
+        const coordinates = navigator.geolocation.getCurrentPosition(async function(position)
+        {
+            console.log(position.coords.latitude);
+            var userlat = position.coords.latitude;
+            var userlong = position.coords.longitude;
+
+            let parsedata = 
+            {
+                id: idofbooking.value,
+                depart: true,
+                username: getCookie('username').toString(),
+                usercoordinateslong: userlong,
+                usercoordinateslat: userlat
+            }
+
+            const response = await fetch('/usernotfiydepart', 
+            {
+                method: 'POST',
+                headers: 
+                {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(parsedata)
+            });
+
+            const serverResponse = await response.json()
+
+            console.log(serverResponse)
+
+            if (serverResponse.success == false) 
+            {
+                alert(serverResponse.message)
+                return
+            }
+        });
+    }
+}
+
+
+</script>
+
+<script src="map.js"></script>
+<script src="js/mapReview.js"></script>
+
+</html>

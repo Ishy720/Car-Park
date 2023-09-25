@@ -1,0 +1,425 @@
+[
+    {
+        "parkingAreaName": "UEA West Car Park",
+        "lat": "52.622350745971",
+        "long": "1.236106751549445",
+        "parkingSpots": [
+            {
+                "name": "Spot 1",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 2",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": true,
+                "isReserved": true
+            },
+            {
+                "name": "Spot 3",
+                "isOccupied": false,
+                "isDisabledSpot": true,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 4",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 5",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 6",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 7",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 8",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 9",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 10",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": true
+            },
+            {
+                "name": "Spot 11",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 12",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 13",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 14",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 15",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 16",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            }
+        ],
+        "daysOpen": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "openingTime": "08:00",
+        "closingTime": "20:00",
+        "disabledSpotsBoolean": true,
+        "evSpotsBoolean": true,
+        "reviews": [
+            {
+                "review": "Sexy place tbh",
+                "reviewRating": "5/5",
+                "nameOfUser": "Ismail Ahmed",
+                "userID": "Ishy720",
+                "flagged": true
+            },
+            {
+                "review": "Test",
+                "reviewRating": "5/5",
+                "nameOfUser": "Ismail Ahmed",
+                "userID": "Ishy720",
+                "flagged": false
+            },
+            {
+                "review": "Shit place",
+                "reviewRating": "0/5",
+                "nameOfUser": "Ismail Ahmed",
+                "userID": "Ishy720",
+                "flagged": false
+            }
+        ]
+    },
+    {
+        "parkingAreaName": "UEA Big Car Park",
+        "lat": "52.62356344382005",
+        "long": "1.243223435694561",
+        "parkingSpots": [
+            {
+                "name": "Spot 1",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 2",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 3",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 4",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 5",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 6",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 7",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 8",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 9",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 10",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 11",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 12",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 13",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 14",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 15",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 16",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            }
+        ],
+        "daysOpen": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "openingTime": "07:00",
+        "closingTime": "23:00",
+        "disabledSpotsBoolean": false,
+        "evSpotsBoolean": false,
+        "reviews": []
+    },
+    {
+        "parkingAreaName": "UEA Triangle Car Park",
+        "lat": "52.62548853264027",
+        "long": "1.2248449114835889",
+        "parkingSpots": [
+            {
+                "name": "Spot 1",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": true
+            },
+            {
+                "name": "Spot 2",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": true
+            },
+            {
+                "name": "Spot 3",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": true
+            },
+            {
+                "name": "Spot 4",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 5",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 6",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 7",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 8",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 9",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 10",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 11",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            },
+            {
+                "name": "Spot 12",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": true
+            },
+            {
+                "name": "Spot 13",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": true
+            },
+            {
+                "name": "Spot 14",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": true
+            },
+            {
+                "name": "Spot 15",
+                "isOccupied": false,
+                "isDisabledSpot": false,
+                "hasElectricCharging": false,
+                "isReserved": false
+            }
+        ],
+        "daysOpen": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+        ],
+        "openingTime": "00:00",
+        "closingTime": "23:00",
+        "disabledSpotsBoolean": false,
+        "evSpotsBoolean": false,
+        "reviews": [
+            {
+                "review": "Too far from campus",
+                "reviewRating": "0.5/5",
+                "nameOfUser": "Ismail Ahmed",
+                "userID": "Ishy720",
+                "flagged": false
+            },
+            {
+                "review": "Test",
+                "reviewRating": "5/5",
+                "nameOfUser": "Ismail Ahmed",
+                "userID": "Ishy720",
+                "flagged": true
+            }
+        ]
+    }
+]

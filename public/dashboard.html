@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Dashboard</title>
+    </head>
+
+    <body>
+
+        <h1>Admin Dashboard</h1>
+
+        <h3>Add parking area</h3>
+        <p>Enter name, latitude and longitude of new parking area to add to map:</p>
+
+        <label for="name">Name of Parking area:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="lat">Latitude:</label><br>
+        <input type="text" id="lat" name="lat"><br>
+        <label for="long">Longitude:</label><br>
+        <input type="text" id="long" name="long"><br>
+        <br>
+        <button id = "submitArea">Submit</button>
+
+        <h3>Delete parking area</h3>
+
+        <label for="parkingAreaNameDelete">Name of Parking area to delete:</label><br>
+        <input type="text" id="parkingAreaNameDelete" name="parkingAreaNameDelete"><br>
+        <br>
+        <button id = "submitDeleteArea">Delete</button>
+
+    </body>
+    <script src="js/dashboard.js"></script>
+</html>
